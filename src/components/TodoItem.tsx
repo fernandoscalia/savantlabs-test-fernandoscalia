@@ -1,4 +1,12 @@
 import type { Todo } from "../types/todo";
+import {
+  ListItem,
+  ListItemText,
+  IconButton,
+  Checkbox,
+  Typography,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface TodoItemProps {
   todo: Todo;
@@ -8,26 +16,41 @@ interface TodoItemProps {
 
 export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   return (
-    <div className="flex justify-between items-center border-b py-2">
-      <div>
-        <input
-          type="checkbox"
-          checked={todo.completed}
-          onChange={() => onToggle(todo.id)}
-          className="mr-2"
-        />
-        <span
-          className={todo.completed ? "line-through text-gray-500" : ""}
-        >
-          {todo.text}
-        </span>
-      </div>
-      <button
-        className="text-red-500 hover:underline"
-        onClick={() => onDelete(todo.id)}
-      >
-        Delete
-      </button>
-    </div>
+    <ListItem
+      secondaryAction={
+        <IconButton edge="end" onClick={() => onDelete(todo.id)}>
+          <DeleteIcon color="error" />
+        </IconButton>
+      }
+    >
+      <Checkbox
+        checked={todo.completed}
+        onChange={() => onToggle(todo.id)}
+      />
+      <ListItemText
+        primary={
+          <Typography
+            sx={{
+              textDecoration: todo.completed ? "line-through" : "none",
+              color: todo.completed ? "text.secondary" : "text.primary",
+            }}
+          >
+            {todo.text}
+          </Typography>
+        }
+        secondary={
+          <>
+            <Typography variant="caption" color="text.secondary">
+              Created: {new Date(todo.createdAt).toLocaleString()}
+            </Typography>
+            {todo.completed && todo.completedAt && (
+              <Typography variant="caption" color="text.secondary" display="block">
+                Completed: {new Date(todo.completedAt).toLocaleString()}
+              </Typography>
+            )}
+          </>
+        }
+      />
+    </ListItem>
   );
 }
