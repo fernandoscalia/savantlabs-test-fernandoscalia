@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TextField, Button, Box } from "@mui/material";
 
 interface TodoInputProps {
   onAdd: (text: string) => void;
@@ -16,16 +17,18 @@ export default function TodoInput({ onAdd }: TodoInputProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 mb-4">
-      <input
-        className="border p-2 flex-1 rounded"
+    <Box component="form" onSubmit={handleSubmit} display="flex" gap={2} mb={2}>
+      <TextField
+        label="New Task"
+        variant="outlined"
+        size="small"
+        fullWidth
         value={text}
         onChange={e => setText(e.target.value)}
-        placeholder="Add a New task..."
       />
-      <button type="submit" className="bg-blue-500 text-white px-4 rounded">
+      <Button type="submit" variant="contained" color="primary">
         Add
-      </button>
-    </form>
+      </Button>
+    </Box>
   );
 }

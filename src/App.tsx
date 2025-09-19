@@ -10,10 +10,10 @@ export default function App() {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",   // horizontal center
-        alignItems: "center",       // vertical center
-        minHeight: "100vh",         // full viewport height
-        backgroundColor: "#f5f5f5", // light background (optional)
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        backgroundColor: "#676f5dff",
       }}
     >
       <Container maxWidth="sm">
