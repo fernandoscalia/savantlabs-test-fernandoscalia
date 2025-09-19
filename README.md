@@ -1,6 +1,4 @@
-## React + TypeScript + Vite
-
-# This application was created with the default template using: React + TypeScript + Vite.
+## This application was created with the default template using: React + TypeScript + Vite.
 
 To run the application, please follow the steps:
 1- clone the repo: 
