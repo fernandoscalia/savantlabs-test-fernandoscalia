@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
 import type { Todo } from "../types/todo";
 
+// key on localStorage
 const STORAGE_KEY = "todos";
 
 export function useTodos() {
-  const [todos, setTodos] = useState<Todo[]>([]);
-
-  useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      setTodos(JSON.parse(saved));
+    // here we load from localStorage only once, on initialization
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? (JSON.parse(saved) as Todo[]) : [];
+    } catch {
+      return [];
     }
-  }, []);
+  });
 
+  // saving to loal storage
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
